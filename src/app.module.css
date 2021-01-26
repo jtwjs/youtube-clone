@@ -1,0 +1,23 @@
+body {
+  background-color: #000;
+}
+
+.main {
+  padding: 2rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+}
