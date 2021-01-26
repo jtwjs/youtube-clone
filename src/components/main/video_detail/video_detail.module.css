@@ -1,0 +1,88 @@
+.watch {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.infoTop,
+.infoBottom {
+  border-bottom: 1px solid #575757;
+  padding: 1rem 0;
+}
+
+.title {
+  padding-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.metadata {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.views::after {
+  content: "•";
+  margin: 0 4px;
+}
+
+.likeBtn {
+  cursor: pointer;
+}
+
+.metaIcon {
+  font-size: 1.5rem;
+}
+
+.metaText {
+  padding: 0 0.5rem;
+  font-weight: 500;
+}
+
+.infoBottomTop {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.channel {
+  display: flex;
+  line-height: 1.5;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.channelInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0.8rem;
+}
+
+.subscriber {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.subscribeBtn {
+  width: 70px;
+  height: 38px;
+  background-color: #cc0000;
+  cursor: pointer;
+}
+
+.detail {
+  margin-left: 60px;
+}
