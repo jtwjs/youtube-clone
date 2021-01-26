@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './video_detail.module.css';
 
 
 const VideoDetail = ({video, video:{snippet}, video:{channelThumbnail}, video:{rating}}) => {
-    console.log(rating);
+    const [isViewMore, setIsViewMore] = useState(false);
+    const viewMore = () => {
+        setIsViewMore(!isViewMore);
+    }
+    const viewMoreType = isViewMore ? styles.viewMore : styles.detail;
+
     return (
         <section className={styles.watch}>
             <div className={styles.video}>
@@ -56,9 +61,12 @@ const VideoDetail = ({video, video:{snippet}, video:{channelThumbnail}, video:{r
                         </button>
                 </div>
                 <div className={styles.infoBottomBottom}>
-                    <div className={styles.detail}>
+                    <div className={`${viewMoreType}`}>
                         {snippet.description}
                     </div>
+                    <button className={styles.viewMoreBtn} onClick={viewMore}>
+                        {isViewMore ? '간략히' : '더보기'}
+                    </button>
                 </div>
                 
             </dd>

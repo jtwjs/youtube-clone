@@ -24,7 +24,7 @@
 
 .title {
   padding-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .metadata {
@@ -95,12 +95,35 @@
   cursor: pointer;
 }
 
-.detail {
+.infoBottomBottom {
   margin-left: 60px;
+}
+.detail {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: 615px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.viewMore {
+  display: block;
+  max-width: 615px;
+  margin-bottom: 1rem;
+}
+
+.viewMoreBtn {
+  color: #aaa;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
   .title {
-    width: 100vw;
+    font-size: 1rem;
+  }
+
+  .infoBottomBottom {
+    margin-left: 0;
   }
 }
