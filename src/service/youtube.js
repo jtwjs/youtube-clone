@@ -1,4 +1,4 @@
-class youtube  {
+class Youtube  {
     constructor(httpClient) {
         this.youtube = httpClient;
     }
@@ -39,3 +39,5 @@ class youtube  {
     }
 
 }
+
+export default Youtube;
