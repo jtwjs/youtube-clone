@@ -1,0 +1,42 @@
+.logo {
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  height: 100%;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.img {
+  width: 2.5rem;
+}
+
+.title {
+  margin: 0 0 0.2rem 0.2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #fff;
+}
+
+.countryCode {
+  display: block;
+  height: 32px;
+  margin-left: 2px;
+  padding-top: 5px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    position: static;
+    margin-right: 2rem;
+  }
+}
