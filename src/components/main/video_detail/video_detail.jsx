@@ -6,15 +6,14 @@ const VideoDetail = ({video, video:{snippet}, video:{channelThumbnail}, video:{r
     console.log(rating);
     return (
         <section className={styles.watch}>
-            <iframe className={styles.video}
-                    title="player"
-                    type="text/html" 
-                    width="100%" 
-                    height="500px"
-                    src={`https://www.youtube.com/embed/${video.id}`}
-                    frameBorder="0" 
-                    allowFullScreen>
-            </iframe>
+            <div className={styles.video}>
+                <iframe title="player"
+                        type="text/html" 
+                        src={`https://www.youtube.com/embed/${video.id}`}
+                        frameBorder="0" 
+                        allowFullScreen>
+                </iframe>
+            </div>
           <dl className={styles.info}>
             <dt className={styles.infoTop}>
                 <h2 className={styles.title}>
