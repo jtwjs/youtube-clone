@@ -1,8 +1,10 @@
 import React, {useState, useCallback, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styles from './app.module.css';
 import Header from './components/header/header';
 import VideoDetail from './components/main/video_detail/video_detail';
 import VideoList from './components/main/video_list/video_list';
+
 
 const App = ({youtube}) => {
   const [videos, setVideos] = useState([]);
@@ -39,7 +41,6 @@ const App = ({youtube}) => {
  },[]);
 
  useEffect(() => {
-   
    youtube.mostPopular()
    .then(videos => {
       addThumbnails(videos); 
@@ -51,10 +52,21 @@ const App = ({youtube}) => {
 
 const display = selectedVideo ? styles.grid : styles.main;
   return (
-    <>
-      <Header search={search} />
+
+    <Router>
+      <Header search={search} selectVideo={selectVideo}/>
       <main className={display}>
-      {         
+      <Switch>
+        <Route path={['/','/home']} exact>
+          <VideoList
+                  video={videos}
+                  onVideoClick={selectVideo}
+                  selectedVideo={selectedVideo}
+                  display={dipslayType}
+                />
+        </Route>
+        <Route path='/watch'>
+          {         
                 selectedVideo && 
                 <VideoDetail video={selectedVideo}/>
             }
@@ -64,8 +76,10 @@ const display = selectedVideo ? styles.grid : styles.main;
                   selectedVideo={selectedVideo}
                   display={dipslayType}
                 />
+        </Route>
+      </Switch>
       </main>
-    </>
+    </Router>
   );
 };
 

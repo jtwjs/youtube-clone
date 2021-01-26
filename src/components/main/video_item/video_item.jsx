@@ -1,10 +1,15 @@
 import React, {memo } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './video_item.module.css';
 const VideoItem = memo(
     ({video, video:{snippet}, onVideoClick, video:{channelThumbnail}}) => {
-        console.log(channelThumbnail);
+        const history = useHistory();
         return (
-            <div className={styles.column} onClick={() => onVideoClick(video)}>
+            <div className={styles.column} onClick={() => {
+                onVideoClick(video);
+                history.push('/watch');
+
+            }}>
                 <dl className={styles.content}>
                     <dt className={styles.thumbnail}>
                         <img src={snippet.thumbnails.medium.url} alt="video thumbnail"/>
