@@ -1,12 +1,12 @@
 import React from 'react';
-import './app.css';
-import styles from 'app.module.css';
+import styles from './app.module.css';
+import Header from './components/header/header';
 
 const App = (props) => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <Header/>
+    </>
   );
 };
 
