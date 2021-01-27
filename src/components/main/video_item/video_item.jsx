@@ -8,6 +8,7 @@ const VideoItem = memo(
             <div className={styles.column} onClick={() => {
                 onVideoClick(video);
                 history.push('/watch');
+                window.scrollTo({top:0});
 
             }}>
                 <dl className={styles.content}>
