@@ -1,6 +1,11 @@
 # Getting Started with Create React App
 
+<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+=======
+- React를 바탕으로 Youtube Data API를 활용하여 개발하였습니다  
+-  🚀 [사이트 바로가기](https://woong-youtube-clone.netlify.app/)
+>>>>>>> b8d4037 (Update README.md)
 
 ## Available Scripts
 
