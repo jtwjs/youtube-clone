@@ -2,13 +2,12 @@ import React from 'react';
 import VideoItem from '../video_item/video_item';
 import styles from './video_list.module.css';
 
-const VideoList = ({video, onVideoClick, display}) => {
-    const displayType = display === 'list' ? styles.list : styles.grid;
-
+const VideoList = ({videos, onVideoClick,selectedVideo}) => {
+    
     return (
-        <section className={displayType}>
+        <section className={selectedVideo ? styles.list : styles.grid}>
            {
-               video.map(video => 
+               videos.map(video => 
                 <VideoItem key={video.id} onVideoClick={onVideoClick} video={video}/>)
            } 
         </section>
