@@ -1,73 +1,42 @@
-import React, {useState, useCallback, useEffect} from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import styles from './app.module.css';
+import React, {useEffect} from 'react';
+import './app.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {requestPopularData} from './store/videos';
 import Header from './components/header/header';
-import Detail from './components/main/detail/detail';
-import VideoList from './components/main/video_list/video_list';
+import Home from './pages/home';
+import Watch from './pages/watch';
 
 
-const App = ({youtube}) => {
-
-  const [videos, setVideos] = useState([]);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-
-  const selectVideo = useCallback((video = null) => {
-    setSelectedVideo(video);
- }, []);
-
- const search = useCallback(async (query) => {
-   const videos = await youtube.search(query)
-    await addThumbnails(videos);
-    }, []);
-  
-
- const addThumbnails = useCallback(async (videos) => {
-   console.log('설마');
-  const promises = [];
-  await videos.forEach(video => {
-    promises.push(
-     youtube.channel(video.snippet.channelId)
-  .then(channelThumbnail => video.channelThumbnail = channelThumbnail));
-  })
-
-  await Promise.all(promises).then(() => {
-    console.log('1-2');
-     setVideos(videos);
- });
-
- },[]);
-
- const loadPopularVideo = useCallback(() => {
-  youtube.mostPopular()
-  .then(videos => {
-     addThumbnails(videos); 
-  });
- }, []);
+const App = ({mostPopular, isFetching}) => {
 
  useEffect(() => {   
-   loadPopularVideo();
+  mostPopular();
   
-  }, [youtube]);
+  }, [mostPopular]);
 
-const display = selectedVideo ? styles.grid : styles.main;
   return (
 
     <Router>
-      <Header search={search} selectVideo={selectVideo} loadPopularVideo={loadPopularVideo}/>
-      <main className={display}>
-      <Switch>
-        <Route path={['/','/home']} exact render={() => <VideoList videos={videos}
-                  onVideoClick={selectVideo}
-                  selectedVideo={selectedVideo}/>}/>
-        <Route path='/watch'
-               render={() => <Detail selectedVideo={selectedVideo}
-                      videos={videos}
-                      selectVideo={selectVideo}/>}
-          />
-      </Switch>
-      </main>
+      <Header/>
+      <Route path={['/','/home']} exact component={Home}/>
+      <Route path='/watch/:id' component={Watch}/>
     </Router>
   );
 };
 
-export default App;
+
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isFetching: state.videos.isFetching
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    mostPopular: () => dispatch(requestPopularData())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

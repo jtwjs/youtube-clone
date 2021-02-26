@@ -2,14 +2,12 @@ import React, {memo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './video_item.module.css';
 const VideoItem = memo(
-    ({video, video:{snippet}, onVideoClick, video:{channelThumbnail}}) => {
+    ({video, video:{snippet}, video:{channelThumbnail}}) => {
         const history = useHistory();
         return (
             <div className={styles.column} onClick={() => {
-                onVideoClick(video);
-                history.push('/watch');
+                history.push(`/watch/${video.id}`);
                 window.scrollTo({top:0});
-
             }}>
                 <dl className={styles.content}>
                     <dt className={styles.thumbnail}>

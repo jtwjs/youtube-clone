@@ -1,17 +1,18 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import {requestPopularData} from '../../store/videos';
 import styles from './logo.module.css';
 
-const Logo = ({selectVideo,loadPopularVideo}) => {
+const Logo = ({mostPopular}) => {
     const history = useHistory();
     
     return (
         <div className={styles.logo}>
             <a href="#a" onClick={(e) => {
                 e.preventDefault();
-                loadPopularVideo();
+                mostPopular();
                 history.push('/')
-                selectVideo();
         }}>
                 <img className={styles.img} src="/assets/img/youtube_icon.svg" alt="youtube logo"/>
                 <h1 className={styles.title}>Premium</h1>
@@ -21,4 +22,9 @@ const Logo = ({selectVideo,loadPopularVideo}) => {
     );
 };
 
-export default Logo;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        mostPopular: () => dispatch(requestPopularData())
+    }
+}
+export default connect(null, mapDispatchToProps)(Logo);

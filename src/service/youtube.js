@@ -1,34 +1,57 @@
-class Youtube  {
-    constructor(httpClient) {
-        this.youtube = httpClient;
-    }
+import axios from 'axios';
 
-    async mostPopular() {
-        const response = await this.youtube.get('videos', {
-            params: {
-                part: 'snippet',
-                chart: 'mostPopular',
-                maxResults: 25,
-            }
+const httpClient = axios.create({
+    baseURL: 'https://www.googleapis.com/youtube/v3',
+    params: {key: process.env.REACT_APP_YOUTUBE_API_KEY},
+  });
+
+
+export const mostPopular = async () => {
+    const promises = [];
+    const {data:{items: videos}} = await httpClient.get('videos', {
+        params: {
+            part: 'snippet',
+            chart: 'mostPopular',
+            maxResults: 25,
+        }
+    });
+    
+    await videos.forEach(video => {
+          promises.push(
+           channel(video.snippet.channelId)
+        .then(channelThumbnail => video.channelThumbnail = channelThumbnail));
         });
-        return response.data.items;
-    }
+    
+    await Promise.all(promises);
 
-    async search(query) {
-        const response = await this.youtube.get('search', {
-            params: {
-                part: 'snippet',
-                maxResults: 25,
-                q: query,
-                type: 'video',
-            }
-        });
+    return videos;
+    };
 
-        return response.data.items.map(item => ({...item, id: item.id.videoId}));
-    }
+export const search = async (query) => {
+    const promises = [];
+    const {data:{items:videos}} = await httpClient.get('search', {
+        params: {
+            part: 'snippet',
+            maxResults: 25,
+            q: query,
+            type: 'video',
+        }
+    });
 
-    async channel(id) {
-        const response = await this.youtube.get('channels', {
+    await videos.forEach(video => {
+        video.id = video.id.videoId;
+        promises.push(
+         channel(video.snippet.channelId)
+      .then(channelThumbnail => video.channelThumbnail = channelThumbnail));
+      });
+  
+    await Promise.all(promises);
+
+    return videos;
+    };
+
+const channel = async (id) => {
+        const response = await httpClient.get('channels', {
             params: {
                 part: 'snippet',
                 id: id,
@@ -36,8 +59,4 @@ class Youtube  {
         });
 
         return response.data.items[0].snippet.thumbnails.medium.url;
-    }
-
-}
-
-export default Youtube;
+    };

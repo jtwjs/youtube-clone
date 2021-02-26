@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
+import {connect} from 'react-redux';
 import styles from './video_detail.module.css';
 
 
-const VideoDetail = ({video, video:{snippet}, video:{channelThumbnail}, video:{rating}}) => {
+const VideoDetail = memo(({video, video:{snippet}, video:{channelThumbnail}}) => {
+
+
+    console.log(video);
     const [isViewMore, setIsViewMore] = useState(false);
     const viewMore = () => {
         setIsViewMore(!isViewMore);
@@ -73,6 +77,10 @@ const VideoDetail = ({video, video:{snippet}, video:{channelThumbnail}, video:{r
         </dl>
     </section>
     );
-};
+});
 
-export default VideoDetail;
+const mapStateToProps = (state, ownProps) => {
+    return {video: state.videos.data.find(item => item.id === ownProps.id)};
+}
+
+export default connect(mapStateToProps)(VideoDetail);

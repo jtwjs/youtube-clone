@@ -1,22 +1,20 @@
 import React, {useRef} from 'react';
 import {useHistory} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {requestSearchData} from '../../store/videos';
 import styles from './search_form.module.css';
 
-const SearchForm = ({search,selectVideo}) => {
+const SearchForm = ({search}) => {
     const history = useHistory();
     const formRef = useRef();
     const inputRef = useRef();
 
-    const onSubmit =  (e) => {
+    const onSubmit =  async (e) => {
         e.preventDefault();
         const value = inputRef.current.value;
         formRef.current.reset();
-        search(value)
-        .then((e) => {console.log('2'); console.log(e); history.push('/')})
-        .then(() => {console.log('3'); selectVideo()});
-        
-        
-
+        await search(value);
+        history.push('/');
     }
 
     return (
@@ -29,4 +27,10 @@ const SearchForm = ({search,selectVideo}) => {
     );
 };
 
-export default SearchForm;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        search: (value) => dispatch(requestSearchData(value))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SearchForm);
