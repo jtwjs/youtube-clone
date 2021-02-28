@@ -80,7 +80,7 @@ const VideoDetail = memo(({video, video:{snippet}, video:{channelThumbnail}}) =>
 });
 
 const mapStateToProps = (state, ownProps) => {
-    return {video: state.videos.data.find(item => item.id === ownProps.id)};
+    return {video: state.video};
 }
 
 export default connect(mapStateToProps)(VideoDetail);

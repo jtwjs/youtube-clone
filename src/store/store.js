@@ -1,21 +1,22 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import createSagamiddleware from 'redux-saga';
 import logger from 'redux-logger';
-import {createBrowserHistory} from 'history';
+import history from '../util/history';
 import rootSaga from '../saga/index';
-import {videos} from './videos';
+import {videoList} from './video_list';
+import {video} from './video';
 
-const customHistory = createBrowserHistory();
 
 const sagaMiddleware = createSagamiddleware({
   context: {
-    history: customHistory
+    history
   }
 });
 const middlewares = [logger, sagaMiddleware];
 
 const rootReducer = combineReducers({
-  videos: videos.reducer,
+  videoList: videoList.reducer,
+  video: video.reducer,
 });
 
 const store = configureStore({

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {requestPopularData} from '../../store/videos';
+import {requestPopularData} from '../../store/video_list';
 import styles from './logo.module.css';
 
 const Logo = ({mostPopular}) => {

@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
 import './app.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {Router} from 'react-router';
+import {Route, Switch } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {requestPopularData} from './store/videos';
+import history from './util/history';
+import {requestPopularData} from './store/video_list';
 import Header from './components/header/header';
 import Home from './pages/home';
 import Watch from './pages/watch';
@@ -17,10 +19,12 @@ const App = ({mostPopular, isFetching}) => {
 
   return (
 
-    <Router>
+    <Router history={history}>
       <Header/>
-      <Route path={['/','/home']} exact component={Home}/>
-      <Route path='/watch/:id' component={Watch}/>
+      <Switch>
+        <Route path={['/','/home']} exact component={Home}/>
+        <Route path='/watch/:id' component={Watch}/>
+      </Switch>
     </Router>
   );
 };
@@ -29,7 +33,7 @@ const App = ({mostPopular, isFetching}) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isFetching: state.videos.isFetching
+    isFetching: state.videoList.isFetching
   }
 };
 

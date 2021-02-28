@@ -4,7 +4,6 @@ import VideoList from '../components/video_list/video_list';
 import '../index.css';
 
 const Watch = ({match:{params:{id}}}) => {
-
   return (
     <main className="main grid">
        <VideoDetail id={id}/>

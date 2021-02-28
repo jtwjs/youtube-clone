@@ -1,14 +1,18 @@
-import React, {memo } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {select} from '../../store/video';
 import styles from './video_item.module.css';
-const VideoItem = memo(
-    ({video, video:{snippet}, video:{channelThumbnail}}) => {
+
+const VideoItem = ({selectVideo, video, video:{snippet}, video:{channelThumbnail}}) => {
         const history = useHistory();
+        const onClick = () => {
+            selectVideo(video);
+            history.push(`/watch/${video.id}`);
+            window.scrollTo({top:0});
+        }
         return (
-            <div className={styles.column} onClick={() => {
-                history.push(`/watch/${video.id}`);
-                window.scrollTo({top:0});
-            }}>
+            <div className={styles.column} onClick={onClick}>
                 <dl className={styles.content}>
                     <dt className={styles.thumbnail}>
                         <img src={snippet.thumbnails.medium.url} alt="video thumbnail"/>
@@ -31,7 +35,12 @@ const VideoItem = memo(
                 </dl>
             </div>
         );
-    }
-);
+    };
 
-export default VideoItem;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        selectVideo: (video) => dispatch(select(video))
+    };
+}
+
+export default connect(null,mapDispatchToProps)(VideoItem);

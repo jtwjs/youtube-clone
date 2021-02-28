@@ -1,13 +1,14 @@
 import {call, takeEvery, put, getContext}  from 'redux-saga/effects';
 import {mostPopular, search} from '../service/youtube';
-import {requestSearchData,responseSearchData, responseError,requestPopularData,responsePopularData } from '../store/videos';
+import {requestSearchData,responseSearchData, responseError,requestPopularData,responsePopularData } from '../store/video_list';
 
 
 
 function* fetchSearchSaga(action) {
-
+  const history = yield getContext('history');
   try {
     const data = yield call(search, action.payload)
+    yield history.push('/home');
     yield put(responseSearchData(data))
   } catch(e) {
     console.log(e);
@@ -24,14 +25,8 @@ function* fetchPopularSaga() {
   }
 }
 
-function* goToHomeSaga() {
-    const history = yield getContext('history');
-    history.push('/');
-
-}
 
 export function* searchVideos() {
-  yield takeEvery(requestSearchData, goToHomeSaga);
   yield takeEvery(requestSearchData, fetchSearchSaga);
 }
 

@@ -2,8 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 
 
 
-export const videos = createSlice({
-  name: 'videosReducer',
+export const videoList = createSlice({
+  name: 'videoListReducer',
   initialState: {
     data: [],
     isFetching: false,
@@ -13,7 +13,7 @@ export const videos = createSlice({
     requestSearchData: (state, action) => {
       state.isFetching = true;
     },
-    responseSearchData: (state, action) => {
+  responseSearchData: (state, action) => {
       state.isFetching = false;
       state.data = action.payload;
     },
@@ -37,5 +37,5 @@ export const {
   requestPopularData,
   responsePopularData,
   responseError
-} = videos.actions;
+} = videoList.actions;
 
