@@ -1,6 +1,6 @@
 # Youtube Clone
 
-`#react-redux` `#redux-saga` `react-router`
+`#react-redux` `#redux-saga` `#react-router`
 
 - React를 바탕으로 Youtube Data API를 활용하여 개발하였습니다
 - 🚀 [사이트 바로가기](https://woong-youtube-clone.netlify.app/)
