@@ -16,9 +16,10 @@ function* fetchSearchSaga(action) {
   }
 }
 function* fetchPopularSaga() {
-
+  const history = yield getContext('history');
   try{
     const data = yield call(mostPopular);
+    history.push('/home');
     yield put(responsePopularData(data));
   }catch(e) {
     yield put(responseError(e));

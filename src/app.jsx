@@ -8,9 +8,11 @@ import {requestPopularData} from './store/video_list';
 import Header from './components/header/header';
 import Home from './pages/home';
 import Watch from './pages/watch';
+import LoadingBar from './components/loading_bar/loading_bar';
 
 
 const App = ({mostPopular, isFetching}) => {
+  console.log(isFetching);
 
  useEffect(() => {   
   mostPopular();
@@ -18,8 +20,11 @@ const App = ({mostPopular, isFetching}) => {
   }, [mostPopular]);
 
   return (
-
     <Router history={history}>
+      {
+        isFetching &&
+        <LoadingBar/>
+      }
       <Header/>
       <Switch>
         <Route path={['/','/home']} exact component={Home}/>

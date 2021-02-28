@@ -1,11 +1,9 @@
 import React, {useRef} from 'react';
-import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {requestSearchData} from '../../store/video_list';
 import styles from './search_form.module.css';
 
 const SearchForm = ({search}) => {
-    const history = useHistory();
     const formRef = useRef();
     const inputRef = useRef();
 
@@ -14,8 +12,6 @@ const SearchForm = ({search}) => {
         const value = inputRef.current.value;
         formRef.current.reset();
         await search(value);
-        // await history.push('/');
-        
     }
 
     return (
